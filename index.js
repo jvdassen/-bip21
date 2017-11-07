@@ -1,11 +1,10 @@
-// https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
-// bitcoin:<address>[?amount=<amount>][?label=<label>][?message=<message>]
+// bazo:<address>[?amount=<amount>][?label=<label>][?message=<message>]
 
 var qs = require('qs')
 
 function decode (uri) {
-  var qregex = /bitcoin:\/?\/?([^?]+)(\?([^]+))?/.exec(uri)
-  if (!qregex) throw new Error('Invalid BIP21 URI: ' + uri)
+  var qregex = /bazo:\/?\/?([^?]+)(\?([^]+))?/.exec(uri)
+  if (!qregex) throw new Error('Invalid URI: ' + uri)
 
   var address = qregex[1]
   var query = qregex[3]
@@ -29,7 +28,7 @@ function encode (address, options) {
     if (options.amount < 0) throw new TypeError('Invalid amount')
   }
 
-  return 'bitcoin:' + address + (query ? '?' : '') + query
+  return 'bazo:' + address + (query ? '?' : '') + query
 }
 
 module.exports = {
